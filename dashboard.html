@@ -1,134 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustShield | Security Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #050508; color: #ffffff; font-family: 'Inter', sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border-radius: 24px; }
-        .status-pulse { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-        .blur-content { filter: blur(6px); pointer-events: none; user-select: none; }
-        .progress-ring { transform: rotate(-90deg); }
-    </style>
-</head>
-<body class="p-4 md:p-10">
+<script>
+    // URL mein ?admin=true ho toh paywall hat jaye
+    const isAdmin = new URLSearchParams(window.location.search).get('admin') === 'true';
+    
+    window.onload = function() {
+        if(isAdmin) {
+            document.getElementById('paywall').style.filter = 'none';
+            document.getElementById('lock-msg').innerText = "Admin Mode: All Leaks Unlocked";
+            console.log("Welcome Founder! Full access granted.");
+        }
+    }
+</script>
 
-    <div class="max-w-7xl mx-auto flex justify-between items-center mb-10">
-        <div>
-            <h1 class="text-2xl font-bold flex items-center gap-3">
-                <div class="w-8 h-8 bg-purple-600 rounded-lg"></div> Security Analysis
-            </h1>
-            <p class="text-gray-500 text-sm mt-1">Monitoring: <span class="text-purple-400 font-mono">github.com/active-repo</span></p>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
-                <div class="status-pulse"></div>
-                <span class="text-xs font-bold text-green-500 uppercase">System Active</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <div class="glass-card p-8 flex flex-col items-center justify-center text-center">
-            <h3 class="text-gray-400 font-medium mb-6 uppercase tracking-wider text-xs">Compliance Readiness</h3>
-            <div class="relative flex items-center justify-center">
-                <svg class="progress-ring" width="180" height="180">
-                    <circle stroke="#1f1f2e" stroke-width="12" fill="transparent" r="70" cx="90" cy="90"/>
-                    <circle stroke="#6d28d9" stroke-width="12" stroke-dasharray="440" stroke-dashoffset="123" stroke-linecap="round" fill="transparent" r="70" cx="90" cy="90"/>
-                </svg>
-                <div class="absolute text-4xl font-black">72%</div>
-            </div>
-            <p class="text-amber-500 text-sm mt-6 font-semibold">⚠️ Action Required: 4 Vulnerabilities</p>
-        </div>
-
-        <div class="glass-card p-8 lg:col-span-2">
-            <h3 class="text-gray-400 font-medium mb-6 uppercase tracking-wider text-xs">Security Scan Results</h3>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-green-500/5 border border-green-500/10 rounded-xl">
-                    <div class="flex items-center gap-3">
-                        <span class="text-green-500">✅</span>
-                        <span class="text-sm font-medium">Issue 1: Found 'email' in auth logic</span>
-                    </div>
-                    <button class="text-xs text-purple-400 font-bold hover:underline">VIEW FIX</button>
-                </div>
-                
-                <div class="flex items-center justify-between p-4 bg-green-500/5 border border-green-500/10 rounded-xl">
-                    <div class="flex items-center gap-3">
-                        <span class="text-green-500">✅</span>
-                        <span class="text-sm font-medium">Issue 2: Found 'password' in config.py</span>
-                    </div>
-                    <button class="text-xs text-purple-400 font-bold hover:underline">VIEW FIX</button>
-                </div>
-
-                <div class="relative">
-                    <div class="blur-content space-y-4">
-                        <div class="p-4 bg-white/5 rounded-xl flex justify-between">
-                            <span class="text-sm">🔒 Issue 3: PII Leak detected in user_meta...</span>
-                        </div>
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
-                            <span class="text-xs font-bold uppercase tracking-tighter">12 more critical leaks hidden</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card p-8 lg:col-span-3 bg-gradient-to-r from-purple-900/20 to-transparent border-purple-500/30">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                <div>
-                    <h2 class="text-2xl font-bold mb-2">Unlock Full Compliance Report 🚀</h2>
-                    <p class="text-gray-400">Get the exact line numbers of leaks and automated fixes. Join Ahmad and 20+ founders who secured their revenue.</p>
-                </div>
-                <div class="text-center md:text-right min-w-[200px]">
-                    <div class="text-3xl font-black mb-1">€19<span class="text-sm font-light text-gray-500">/mo</span></div>
-                    <button onclick="window.open('https://buy.stripe.com/YOUR_LINK', '_blank')" 
-                            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg shadow-purple-600/20 transition-all">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-    <div class="glass-card p-6 border-gray-700">
-        <h4 class="font-bold">Free Audit</h4>
-        <div class="text-2xl font-black my-2">€0</div>
-        <ul class="text-xs text-gray-400 space-y-2 mb-6">
-            <li>✅ 2 Critical Leaks check</li>
-            <li>✅ Compliance Score</li>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-10">
+    <div class="glass-card p-6 border-gray-800">
+        <h4 class="text-sm font-bold text-gray-400">STARTER</h4>
+        <div class="text-3xl font-black my-2">€0</div>
+        <ul class="text-xs text-gray-500 space-y-2 mb-6">
+            <li>✅ 2 Critical Leaks Only</li>
+            <li>✅ Community Support</li>
         </ul>
-        <button class="w-full py-2 border border-gray-600 rounded-lg text-xs">Current Plan</button>
+        <button class="w-full py-2 bg-gray-800 rounded-lg text-xs opacity-50">Current Plan</button>
     </div>
 
-    <div class="glass-card p-6 border-purple-500 bg-purple-900/10">
-        <h4 class="font-bold text-purple-400">Pro Plan 🚀</h4>
-        <div class="text-2xl font-black my-2">€19<span class="text-sm font-light">/mo</span></div>
+    <div class="glass-card p-6 border-purple-500 bg-purple-900/10 scale-105 shadow-2xl shadow-purple-600/20">
+        <h4 class="text-sm font-bold text-purple-400">PRO 🚀</h4>
+        <div class="text-3xl font-black my-2">€19<span class="text-sm font-normal">/mo</span></div>
         <ul class="text-xs text-gray-300 space-y-2 mb-6">
-            <li>✅ Unlock all 14+ Leaks</li>
-            <li>✅ Automated Fixes</li>
-            <li>✅ Slack/Email Alerts</li>
+            <li>✅ Unlock All 14+ Leaks</li>
+            <li>✅ Exact Line Numbers</li>
+            <li>✅ Slack Integration</li>
         </ul>
-        <button onclick="window.open('YOUR_STRIPE_PRO_LINK', '_blank')" class="w-full py-2 bg-purple-600 rounded-lg text-xs font-bold">Upgrade Now</button>
+        <button onclick="window.open('https://buy.stripe.com/YOUR_PRO_LINK', '_blank')" 
+                class="w-full py-3 bg-purple-600 rounded-xl text-xs font-bold hover:bg-purple-700 transition-all">
+            Get Pro Access
+        </button>
     </div>
 
-    <div class="glass-card p-6 border-blue-500">
-        <h4 class="font-bold text-blue-400">Enterprise</h4>
-        <div class="text-2xl font-black my-2">€49<span class="text-sm font-light">/mo</span></div>
+    <div class="glass-card p-6 border-blue-900">
+        <h4 class="text-sm font-bold text-blue-400">ENTERPRISE</h4>
+        <div class="text-3xl font-black my-2">€49<span class="text-sm font-normal">/mo</span></div>
         <ul class="text-xs text-gray-400 space-y-2 mb-6">
             <li>✅ Unlimited Repositories</li>
-            <li>✅ Dedicated Support</li>
-            <li>✅ Custom PDF Reports</li>
+            <li>✅ Dedicated Auditor</li>
+            <li>✅ PDF Compliance Reports</li>
         </ul>
-        <button onclick="window.open('YOUR_STRIPE_ENT_LINK', '_blank')" class="w-full py-2 bg-blue-600 rounded-lg text-xs font-bold">Contact Sales</button>
+        <button onclick="window.open('https://buy.stripe.com/YOUR_ENT_LINK', '_blank')" 
+                class="w-full py-2 bg-blue-900 rounded-lg text-xs font-bold">Contact Sales</button>
     </div>
-                        </div>
-                        
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</body>
-</html>
+</div>
