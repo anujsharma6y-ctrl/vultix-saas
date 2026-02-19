@@ -1,51 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustShield | Configuration</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #0b0b0f; color: #ffffff; font-family: sans-serif; }
-        .card { background-color: #12121a; border: 1px solid #1f1f2e; border-radius: 12px; }
-        .input-box { background-color: #08080c; border: 1px solid #1f1f2e; width: 100%; padding: 12px; border-radius: 8px; margin-bottom: 20px; transition: 0.3s; cursor: pointer; display: flex; align-items: center; }
-        .input-box:hover { border-color: #6d28d9; }
-        input[type="radio"] { margin-right: 12px; accent-color: #6d28d9; }
-    </style>
-</head>
-<body class="flex flex-col items-center justify-center min-h-screen p-6">
+<script>
+    function goToDashboard() {
+        // 1. Dono sections ke selections check karna
+        const sizeSelected = document.querySelector('input[name="size"]:checked');
+        const compSelected = document.querySelector('input[name="comp"]:checked');
 
-    <div class="mb-10 text-2xl font-bold flex items-center">
-        <div class="w-8 h-8 bg-purple-600 rounded-lg mr-2"></div> AWSight <span class="text-gray-500 text-sm ml-2">Compliance</span>
-    </div>
-
-    <div class="card w-full max-w-lg p-8">
-        <h3 class="text-gray-400 mb-4 font-medium">What is your organization size?</h3>
-        <div class="input-box">
-            <input type="radio" name="size" id="s1"><label for="s1">Startup (1-50 employees)</label>
-        </div>
-        <div class="input-box">
-            <input type="radio" name="size" id="s2"><label for="s2">Small Business (51-200 employees)</label>
-        </div>
-
-        <h3 class="text-gray-400 mt-6 mb-4 font-medium">Which compliance standards apply?</h3>
-        <div class="input-box">
-            <input type="radio" name="comp" id="c1"><label for="c1">SOC 2 Type II</label>
-        </div>
-        <div class="input-box">
-            <input type="radio" name="comp" id="c2"><label for="c2">PCI DSS, HIPAA, or GDPR</label>
-        </div>
-
-        <button onclick="goToDashboard()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-lg mt-6 transition">
-            Next →
-        </button>
-    </div>
-
-    <script>
-        function goToDashboard() {
-            // Dashboard page par bhejne ke liye
-            window.location.href = "dashboard.html";
+        // 2. Agar koi ek bhi missing hai toh alert dikhana
+        if (!sizeSelected || !compSelected) {
+            alert("Please select both your Organization Size and Compliance type before proceeding!");
+            return; // Age badhne se rok dena
         }
-    </script>
-</body>
-</html>
+
+        // 3. Agar sab sahi hai, tabhi dashboard par bhejna
+        window.location.href = "dashboard.html";
+    }
+</script>
