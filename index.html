@@ -2,77 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustShield | Secure Your Repo</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>AuditPulse | Real-time Repo Security</title>
     <style>
-        body { background-color: #050508; color: #ffffff; font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: radial-gradient(circle at center, #1e1b4b 0%, #050508 100%); }
-        .glass-input { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
-        .premium-btn { background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%); transition: all 0.3s ease; }
-        .premium-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px #6d28d9; }
-        .loader { border: 3px solid #1f1f2e; border-top: 3px solid #6d28d9; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: none; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .hero-glow { background: radial-gradient(circle at 50% -20%, #3b82f633 0%, #020617 100%); }
+        .input-focus:focus { box-shadow: 0 0 20px #3b82f6; border-color: #3b82f6; }
     </style>
 </head>
-<body class="hero-gradient min-h-screen flex flex-col items-center justify-center p-6">
-
-    <nav class="absolute top-0 w-full p-8 flex justify-between items-center max-w-6xl">
-        <div class="text-xl font-bold flex items-center">
-            <div class="w-6 h-6 bg-purple-600 rounded mr-2"></div> TrustShield
-        </div>
-        <div class="hidden md:flex space-x-8 text-sm text-gray-400">
-            <a href="#">How it works</a>
-            <a href="#">Pricing</a>
-            <a href="#">Documentation</a>
-        </div>
+<body class="bg-[#020617] text-white hero-glow min-h-screen">
+    <nav class="p-6 flex justify-between max-w-6xl mx-auto">
+        <div class="text-2xl font-black tracking-tighter text-blue-500 italic">AUDITPULSE</div>
+        <div class="space-x-6 text-sm text-gray-400 pt-2"><span>Pricing</span> <span>Docs</span></div>
     </nav>
 
-    <div class="text-center max-w-3xl">
-        <span class="text-purple-400 text-sm font-semibold tracking-widest uppercase border border-purple-400/30 px-3 py-1 rounded-full mb-6 inline-block">
-            v1.0 Beta is Live
-        </span>
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500">
-            Scan your GitHub Repo for GDPR leaks in seconds.
-        </h1>
-        <p class="text-gray-400 text-lg mb-10">
-            Join 170+ founders securing their startups with TrustShield. Stop PII leaks before they become expensive fines.
-        </p>
-
-        <div class="glass-input p-2 rounded-2xl flex flex-col md:flex-row gap-2 shadow-2xl">
-            <input type="text" id="repo-url" placeholder="Paste GitHub Repository URL (e.g. https://github.com/user/repo)" 
-                   class="bg-transparent flex-1 px-6 py-4 outline-none text-white placeholder-gray-500">
-            <button onclick="startScan()" id="scan-btn" class="premium-btn px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-2">
-                <span id="btn-text">Start Free Scan</span>
-                <div id="loader" class="loader"></div>
+    <div class="flex flex-col items-center justify-center pt-24 px-4 text-center">
+        <h1 class="text-6xl font-extrabold mb-6">Secure Your Code <br><span class="text-blue-500">In 10 Seconds.</span></h1>
+        <p class="text-gray-400 max-w-xl mb-10">Stop GDPR leaks and exposed API keys. Trusted by 170+ developers to maintain 100% compliance.</p>
+        
+        <div class="w-full max-w-2xl bg-white/5 p-2 rounded-2xl border border-white/10 backdrop-blur-xl flex flex-col md:flex-row gap-2">
+            <input type="text" id="repoUrl" placeholder="https://github.com/your-username/repo" 
+                   class="bg-transparent flex-1 px-6 py-4 outline-none input-focus rounded-xl transition-all">
+            <button onclick="startAudit()" class="bg-blue-600 hover:bg-blue-500 px-10 py-4 rounded-xl font-bold transition-all">
+                Run Free Audit
             </button>
         </div>
-        
-        <p class="mt-4 text-xs text-gray-500 italic">No credit card required for basic scan.</p>
     </div>
 
     <script>
-        function startScan() {
-            const url = document.getElementById('repo-url').value;
-            const btnText = document.getElementById('btn-text');
-            const loader = document.getElementById('loader');
-            const btn = document.getElementById('scan-btn');
-
-            if (!url.includes('github.com')) {
-                alert("Please enter a valid GitHub URL!");
-                return;
-            }
-
-            // Animation start
-            btnText.innerText = "Analyzing Repo...";
-            loader.style.display = "block";
-            btn.style.opacity = "0.8";
-            btn.disabled = true;
-
-            // Fake processing time to build tension (Real SaaS feel)
-            setTimeout(() => {
-                window.location.href = "dashboard.html";
-            }, 2500);
+        function startAudit() {
+            const url = document.getElementById('repoUrl').value;
+            if(!url.includes('github.com')) return alert('Please enter a valid GitHub URL');
+            // Mocking the scan excitement
+            document.querySelector('button').innerText = "Analyzing Secrets...";
+            setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
         }
     </script>
 </body>
