@@ -1,13 +1,32 @@
 name: TrustShield Compliance Scan
-on: [push] # Har naye code par apne aap chalega
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Isse aap manual bhi scan start kar sakte hain
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Run GDPR Scanner
-        run: python scanner.py
-      - name: Deploy Result to Dashboard #
-        run: |
-          # Dashboard update karne ka logic yahan aayega
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Run Compliance Scanner
+      run: |
+        python scanner.py
+
+    - name: Upload Scan Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: compliance-report
+        path: scan_results.json # Ye file scanner.py generate karega
+        
