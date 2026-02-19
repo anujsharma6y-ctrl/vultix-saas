@@ -3,64 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustShield Dashboard</title>
+    <title>TrustShield | Security Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0d0d12; color: #ffffff; }
+        body { background-color: #0d0d12; color: #ffffff; font-family: sans-serif; }
         .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; }
         .progress-ring { transform: rotate(-90deg); }
+        .animate-scan { border-bottom: 2px solid #7c3aed; width: 100%; animation: scan 2s infinite ease-in-out; }
+        @keyframes scan { 0% { transform: translateY(0); } 50% { transform: translateY(20px); } 100% { transform: translateY(0); } }
     </style>
 </head>
 <body class="p-6 md:p-12">
 
     <div class="flex justify-between items-center mb-10">
         <div>
-            <h1 class="text-2xl font-bold">Security Overview</h1>
-            <p class="text-gray-400">Project: <span class="text-purple-400" id="repo-name">my-startup-repo</span></p>
+            <h1 class="text-2xl font-bold">Security & Compliance Dashboard</h1>
+            <p class="text-gray-400">Monitoring: <span class="text-purple-400 font-mono">trustshield-saas</span></p>
         </div>
         <div class="bg-green-500/10 text-green-500 px-4 py-1 rounded-full text-sm font-medium border border-green-500/20">
-            ● Live Monitoring Active
+            ● System Active
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <div class="glass-card p-6 flex flex-col items-center">
-            <h3 class="text-gray-400 mb-4">GDPR Readiness</h3>
-            <div class="relative w-32 h-32">
+        <div class="glass-card p-8 flex flex-col items-center justify-center">
+            <h3 class="text-gray-400 mb-6 font-medium">Compliance Readiness</h3>
+            <div class="relative w-40 h-40">
                 <svg class="w-full h-full progress-ring">
-                    <circle cx="64" cy="64" r="58" stroke="#1f1f2e" stroke-width="8" fill="transparent" />
-                    <circle cx="64" cy="64" r="58" stroke="#7c3aed" stroke-width="8" fill="transparent" stroke-dasharray="364" stroke-dashoffset="100" />
+                    <circle cx="80" cy="80" r="72" stroke="#1f1f2e" stroke-width="10" fill="transparent" />
+                    <circle cx="80" cy="80" r="72" stroke="#7c3aed" stroke-width="10" fill="transparent" stroke-dasharray="452" stroke-dashoffset="120" />
                 </svg>
-                <div class="absolute inset-0 flex items-center justify-center font-bold text-2xl">72%</div>
+                <div class="absolute inset-0 flex items-center justify-center font-bold text-3xl">72%</div>
             </div>
-            <p class="mt-4 text-xs text-center text-gray-500 italic">28% remaining to reach full compliance.</p>
+            <p class="mt-4 text-sm text-yellow-500">Action Required: 4 Vulnerabilities</p>
         </div>
 
         <div class="glass-card p-6 col-span-2">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-gray-400">Active Vulnerability Scan</h3>
-                <span class="text-purple-400 text-sm animate-pulse">Scanning files...</span>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-gray-400">Real-time Security Logs</h3>
+                <span class="text-xs font-mono text-purple-400 animate-pulse">SCANNING IN PROGRESS...</span>
             </div>
             <div class="space-y-4">
-                <div class="flex items-center justify-between text-sm p-3 bg-white/5 rounded-lg border border-white/5">
-                    <span class="flex items-center"><span class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></span> PII Leak Detection</span>
-                    <span class="text-gray-500">Processing auth.py...</span>
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
+                    <span class="text-sm">🔍 Scanning <span class="text-gray-400 font-mono">scanner.py</span> for PII Leaks</span>
+                    <span class="text-blue-400 text-xs">Processing...</span>
                 </div>
-                <div class="flex items-center justify-between text-sm p-3 bg-white/5 rounded-lg border border-white/5">
-                    <span class="flex items-center"><span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span> Dependency Audit</span>
-                    <span class="text-green-500">Secure</span>
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
+                    <span class="text-sm">🛡️ GDPR Keyword Match: <span class="text-red-400">'email'</span> found in auth logic</span>
+                    <span class="text-red-500 text-xs font-bold">WARNING</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
+                    <span class="text-sm">📦 Dependency Check: <span class="text-green-400">0 vulnerabilities</span> found</span>
+                    <span class="text-green-500 text-xs">SECURE</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="mt-10 glass-card p-8 bg-gradient-to-r from-purple-900/20 to-transparent">
-        <h2 class="text-xl font-bold mb-2">Detailed Risk Assessment Ready</h2>
-        <p class="text-gray-400 mb-6">Our scan detected 4 high-priority GDPR violations. Download the full PDF audit report to fix them before your next launch.</p>
-        <button class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-lg font-bold transition">
-            Download PDF Audit Report (€29)
-        </button>
+    <div class="mt-8 glass-card p-8 bg-gradient-to-r from-purple-900/20 to-transparent border-purple-500/30">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <h2 class="text-xl font-bold mb-2">Detailed Compliance Audit Ready</h2>
+                <p class="text-gray-400 max-w-xl">Your repository has been analyzed. We found several GDPR and SOC 2 violations that could lead to legal risks. Get the full fix-guide now.</p>
+            </div>
+            <button onclick="alert('Redirecting to Stripe Payment...')" class="bg-purple-600 hover:bg-purple-700 text-white px-10 py-4 rounded-xl font-bold shadow-lg shadow-purple-600/20 transition-all transform hover:scale-105">
+                Download PDF Audit Report (€29)
+            </button>
+        </div>
     </div>
 
 </body>
