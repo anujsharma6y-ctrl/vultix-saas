@@ -1,77 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrustShield | Security Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #0d0d12; color: #ffffff; font-family: sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; }
-        .progress-ring { transform: rotate(-90deg); }
-        .animate-scan { border-bottom: 2px solid #7c3aed; width: 100%; animation: scan 2s infinite ease-in-out; }
-        @keyframes scan { 0% { transform: translateY(0); } 50% { transform: translateY(20px); } 100% { transform: translateY(0); } }
-    </style>
-</head>
-<body class="p-6 md:p-12">
+<div class="glass-card p-6 col-span-2">
+    <h3 class="text-gray-400 mb-6">Security Scan Results</h3>
+    <div class="space-y-4">
+        <div class="p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex justify-between">
+            <span class="text-sm text-green-400">✅ Issue 1: Found 'email' in auth logic</span>
+            <span class="text-xs">RESOLVE NOW</span>
+        </div>
+        <div class="p-4 bg-green-500/10 border border-green-500/20 rounded-lg flex justify-between">
+            <span class="text-sm text-green-400">✅ Issue 2: Found 'password' in config.py</span>
+            <span class="text-xs">RESOLVE NOW</span>
+        </div>
 
-    <div class="flex justify-between items-center mb-10">
+        <div class="p-4 bg-gray-800/50 border border-dashed border-gray-600 rounded-lg flex justify-between items-center opacity-60">
+            <span class="text-sm">🔒 12 more critical vulnerabilities hidden...</span>
+            <button class="bg-purple-600 text-xs px-3 py-1 rounded">UNLOCK ALL</button>
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 glass-card p-8 bg-gradient-to-r from-purple-900/40 to-black border-purple-500/50">
+    <div class="flex flex-col md:flex-row justify-between items-center">
         <div>
-            <h1 class="text-2xl font-bold">Security & Compliance Dashboard</h1>
-            <p class="text-gray-400">Monitoring: <span class="text-purple-400 font-mono">trustshield-saas</span></p>
+            <h2 class="text-xl font-bold">Upgrade to Pro Plan 🚀</h2>
+            <p class="text-gray-400">Get monthly automated scans, Slack alerts, and full fix-guides.</p>
         </div>
-        <div class="bg-green-500/10 text-green-500 px-4 py-1 rounded-full text-sm font-medium border border-green-500/20">
-            ● System Active
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        <div class="glass-card p-8 flex flex-col items-center justify-center">
-            <h3 class="text-gray-400 mb-6 font-medium">Compliance Readiness</h3>
-            <div class="relative w-40 h-40">
-                <svg class="w-full h-full progress-ring">
-                    <circle cx="80" cy="80" r="72" stroke="#1f1f2e" stroke-width="10" fill="transparent" />
-                    <circle cx="80" cy="80" r="72" stroke="#7c3aed" stroke-width="10" fill="transparent" stroke-dasharray="452" stroke-dashoffset="120" />
-                </svg>
-                <div class="absolute inset-0 flex items-center justify-center font-bold text-3xl">72%</div>
-            </div>
-            <p class="mt-4 text-sm text-yellow-500">Action Required: 4 Vulnerabilities</p>
-        </div>
-
-        <div class="glass-card p-6 col-span-2">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-gray-400">Real-time Security Logs</h3>
-                <span class="text-xs font-mono text-purple-400 animate-pulse">SCANNING IN PROGRESS...</span>
-            </div>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
-                    <span class="text-sm">🔍 Scanning <span class="text-gray-400 font-mono">scanner.py</span> for PII Leaks</span>
-                    <span class="text-blue-400 text-xs">Processing...</span>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
-                    <span class="text-sm">🛡️ GDPR Keyword Match: <span class="text-red-400">'email'</span> found in auth logic</span>
-                    <span class="text-red-500 text-xs font-bold">WARNING</span>
-                </div>
-                <div class="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5">
-                    <span class="text-sm">📦 Dependency Check: <span class="text-green-400">0 vulnerabilities</span> found</span>
-                    <span class="text-green-500 text-xs">SECURE</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-8 glass-card p-8 bg-gradient-to-r from-purple-900/20 to-transparent border-purple-500/30">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-6 md:mb-0">
-                <h2 class="text-xl font-bold mb-2">Detailed Compliance Audit Ready</h2>
-                <p class="text-gray-400 max-w-xl">Your repository has been analyzed. We found several GDPR and SOC 2 violations that could lead to legal risks. Get the full fix-guide now.</p>
-            </div>
-            <button onclick="alert('Redirecting to Stripe Payment...')" class="bg-purple-600 hover:bg-purple-700 text-white px-10 py-4 rounded-xl font-bold shadow-lg shadow-purple-600/20 transition-all transform hover:scale-105">
-                Download PDF Audit Report (€29)
+        <div class="text-center">
+            <div class="text-2xl font-bold mb-2">€19<span class="text-sm font-normal">/month</span></div>
+            <button onclick="window.location.href='YOUR_STRIPE_SUBSCRIPTION_LINK'" class="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-xl font-bold transition-all">
+                Subscribe Now
             </button>
         </div>
     </div>
-
-</body>
-</html>
+</div>
