@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch: # Isse aap manual bhi scan start kar sakte hain
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4 # Updated to v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5 # Updated to v5
       with:
         python-version: '3.9'
 
@@ -25,8 +25,7 @@ jobs:
         python scanner.py
 
     - name: Upload Scan Results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4 # FIX: v3 se v4 kar diya gaya hai
       with:
         name: compliance-report
-        path: scan_results.json # Ye file scanner.py generate karega
-        
+        path: scan_results.json
