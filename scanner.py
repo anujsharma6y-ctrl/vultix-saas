@@ -1,33 +1,49 @@
 import os
+import json
 
-# GDPR Keywords jo humein scan karne hain
-GDPR_KEYWORDS = ['email', 'address', 'phone', 'ip_address', 'credit_card', 'passport']
+# Configuration: In keywords ko scan kiya jayega
+SENSITIVE_DATA = {
+    "GDPR_RISK": ["email", "address", "phone", "ip_address", "credit_card", "passport"],
+    "SECURITY_RISK": ["api_key", "password", "secret", "db_password", "token"]
+}
 
-def scan_for_gdpr_risks():
-    print("🛡️ Starting GDPR Compliance Audit...")
-    risks_found = []
+def start_compliance_audit():
+    print("🚀 TrustShield Engine: Starting deep scan...")
+    audit_results = {
+        "score": 100,
+        "vulnerabilities": [],
+        "status": "Incomplete"
+    }
     
-    # Ye logic files ko scan karega
+    # Har file ko scan karna
     for root, dirs, files in os.walk("."):
         for file in files:
-            if file.endswith((".py", ".js", ".sql")):
-                with open(os.path.join(root, file), 'r', errors='ignore') as f:
-                    content = f.read().lower()
-                    for keyword in GDPR_KEYWORDS:
-                        if keyword in content:
-                            risks_found.append(f"Potential PII ({keyword}) found in {file}")
+            if file.endswith((".py", ".js", ".env", ".json")):
+                file_path = os.path.join(root, file)
+                try:
+                    with open(file_path, 'r', errors='ignore') as f:
+                        content = f.read().lower()
+                        for category, keywords in SENSITIVE_DATA.items():
+                            for word in keywords:
+                                if word in content:
+                                    audit_results["vulnerabilities"].append({
+                                        "file": file,
+                                        "type": category,
+                                        "found": word
+                                    })
+                                    audit_results["score"] -= 7 # Har issue par score kam hoga
+                except Exception as e:
+                    continue
 
-    return risks_found
+    audit_results["score"] = max(audit_results["score"], 0)
+    audit_results["status"] = "Complete"
+    
+    # Report file generate karna
+    with open("scan_results.json", "w") as report_file:
+        json.dump(audit_results, report_file, indent=4)
+    
+    print(f"✅ Audit Finished. Score: {audit_results['score']}%")
+    return audit_results
 
 if __name__ == "__main__":
-    results = scan_for_gdpr_risks()
-    # Report generate karne ka logic
-    with open("compliance_report.txt", "w") as f:
-        f.write("TRUSTSHIELD EU - COMPLIANCE REPORT\n")
-        f.write("-" * 30 + "\n")
-        if not results:
-            f.write("✅ Status: GDPR Ready\n")
-        else:
-            f.write("⚠️ Status: Risks Detected\n")
-            for risk in results:
-                f.write(f"- {risk}\n")
+    start_compliance_audit()
