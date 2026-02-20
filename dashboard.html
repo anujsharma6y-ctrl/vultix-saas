@@ -47,3 +47,36 @@
     </div>
 </body>
 </html>
+<div id="security-report" class="report-container" style="display: none;">
+    <div class="report-header">
+        <h2>Vultix Scan Report 🦅</h2>
+        <span class="status-badge">Final Result</span>
+    </div>
+    
+    <div class="report-grid">
+        <div class="report-item">
+            <span class="label">Security Score:</span>
+            <span class="value high">85/100</span>
+        </div>
+        <div class="report-item">
+            <span class="label">API Keys Leaked:</span>
+            <span class="value safe">0 Found</span>
+        </div>
+        <div class="report-item">
+            <span class="label">Risk Level:</span>
+            <span class="value low">LOW</span>
+        </div>
+    </div>
+
+    <div class="report-details">
+        <h3>Analysis Summary:</h3>
+        <ul>
+            <li>✅ No .env files detected in public directory.</li>
+            <li>✅ AWS/Stripe keys not found in commit history.</li>
+            <li>⚠️ Recommendation: Add a .gitignore file for local secrets.</li>
+        </ul>
+    </div>
+    
+    <button class="btn-download">Download PDF Report (Coming Soon)</button>
+</div>
+
