@@ -1,63 +1,66 @@
 let currentTool = 'dashboard';
 
-// Sidebar selection logic
 function selectTool(tool, element) {
     currentTool = tool;
     document.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
     element.classList.add('active');
     
+    // Toggle Blast Radius Section
+    document.getElementById('blast-radius-container').style.display = (tool === 'blast-radius') ? 'block' : 'none';
+    
     const titles = {
         'dashboard': 'Infrastructure Health Overview',
-        'secrets': 'Secret & Key Leak Scanner',
-        'compliance': 'SOC2 / GDPR Compliance Audit',
-        'blast-radius': 'Attack Blast Radius Map'
+        'secrets': 'Credential Leak Intelligence',
+        'blast-radius': 'Attack Path Visualization',
+        'threat-lab': 'Malicious Actor Simulation'
     };
     document.getElementById('main-title').innerText = titles[tool];
 }
 
 document.getElementById('scan-btn').onclick = function() {
     const url = document.getElementById('repo-url').value;
-    if(!url) { alert("Please enter a URL first"); return; }
+    if(!url) { alert("Please target a system first."); return; }
 
-    this.innerHTML = "🔍 Scanning Assets...";
+    this.innerHTML = "🔍 Running Day 3 Simulation...";
     this.disabled = true;
 
-    // Simulate Scan Delay
     setTimeout(() => {
-        let score = Math.floor(Math.random() * (95 - 60) + 60);
-        let findings = Math.floor(Math.random() * 8);
+        let score = (currentTool === 'threat-lab' || currentTool === 'blast-radius') ? 34 : 92;
+        let findings = (score < 50) ? 14 : 0;
 
         document.getElementById('main-score').innerText = score + "%";
         document.getElementById('vuln-count').innerText = findings;
         
-        showResults(currentTool, findings);
+        if(currentTool === 'blast-radius') renderNodes();
         
         document.getElementById('security-report').style.display = 'block';
-        this.innerHTML = "Run Audit";
+        updateResults(currentTool, score);
+        
+        this.innerHTML = "Launch Security Audit";
         this.disabled = false;
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }, 1500);
 };
 
-function showResults(tool, count) {
-    const list = document.getElementById('report-details-list');
-    let html = "";
+function renderNodes() {
+    const map = document.getElementById('visual-map');
+    map.innerHTML = `
+        <div class="node" style="top:20%; left:45%; background:#ef4444; box-shadow:0 0 20px #ef4444;">EXPOSED API</div>
+        <div class="node" style="top:60%; left:25%; background:#f59e0b;">S3 BUCKET (PROD)</div>
+        <div class="node" style="top:60%; left:65%; background:#3b82f6;">IAM ROLE: ADMIN</div>
+    `;
+}
 
-    if(tool === 'secrets') {
-        html = `<div class="compliance-row ${count > 0 ? 'fail' : 'pass'}">
-            <div><strong>Leak Check</strong><p>Found ${count} potentially exposed credentials in source code.</p></div>
-            <div class="check-status">${count > 0 ? 'FAIL' : 'PASS'}</div>
-        </div>`;
-    } else if(tool === 'blast-radius') {
-        html = `<div class="compliance-row pass">
-            <div><strong>Blast Radius Mapping</strong><p>Interactive graph generated. 3 high-risk paths identified.</p></div>
-            <div class="check-status">COMPLETE</div>
-        </div>`;
-    } else {
-        html = `<div class="compliance-row pass">
-            <div><strong>General Audit</strong><p>Security posture is stable. No critical zero-day exploits found.</p></div>
-            <div class="check-status">PASS</div>
-        </div>`;
-    }
-    list.innerHTML = html;
+function updateResults(tool, score) {
+    const list = document.getElementById('report-details-list');
+    const logs = {
+        'dashboard': 'No unauthorized access detected in current perimeter.',
+        'secrets': 'Checked 4,500 lines. 0 hardcoded keys found.',
+        'blast-radius': 'Attack Path: Exposed API -> IAM Role -> Database Compromise.',
+        'threat-lab': 'Critical: Privilege escalation successful via AssumeRole abuse.'
+    };
+    
+    list.innerHTML = `<div class="compliance-row">
+        <div><strong>${tool.toUpperCase()} INSIGHT</strong><p style="color:#9ca3af; margin-top:5px;">${logs[tool]}</p></div>
+        <div style="font-weight:bold; color:${score < 50 ? '#ef4444' : '#10b981'}">${score < 50 ? 'CRITICAL' : 'SECURE'}</div>
+    </div>`;
 }
