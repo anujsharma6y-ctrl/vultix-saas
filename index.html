@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vultix | Multi-Tool Security Audit</title>
+    <title>Vultix | Security Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -15,27 +15,27 @@
                 <span class="logo-text">VULTIX</span>
             </div>
             <nav class="side-nav">
-                <a href="#" class="active" onclick="selectTool('full_audit', this)"><i class="fas fa-th-large"></i> Full Audit</a>
-                <a href="#" onclick="selectTool('secret_scan', this)"><i class="fas fa-key"></i> Secret Scanner</a>
-                <a href="#" onclick="selectTool('prowler', this)"><i class="fas fa-cloud-sun"></i> Prowler Audit</a>
-                <a href="#" onclick="selectTool('vulnerability', this)"><i class="fas fa-bug"></i> Vulnerability</a>
+                <a href="#" class="active" onclick="selectTool('dashboard', this)"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="#" onclick="selectTool('secrets', this)"><i class="fas fa-key"></i> Secret Scanner</a>
+                <a href="#" onclick="selectTool('compliance', this)"><i class="fas fa-shield-alt"></i> Compliance</a>
+                <a href="#" onclick="selectTool('blast-radius', this)"><i class="fas fa-project-diagram"></i> Blast Radius</a>
             </nav>
-            <div class="pro-tag">FREE BETA</div>
+            <div class="pro-badge">PRO WAITLIST</div>
         </aside>
 
         <main class="main-content">
             <header class="top-header">
                 <div class="status-indicator"><span class="pulse"></span> System Operational</div>
-                <div class="user-profile"><i class="fas fa-user-circle"></i> Guest Admin</div>
+                <div class="user-profile"><i class="fas fa-user-circle"></i> Guest Developer</div>
             </header>
 
             <section class="dashboard-hero">
                 <div class="hero-text">
-                    <h1 id="tool-title">Infrastructure Health Overview</h1>
-                    <p id="tool-desc">Comprehensive security assessment for your cloud assets.</p>
+                    <h1 id="main-title">Infrastructure Health Overview</h1>
+                    <p id="sub-title">Automated security assessment for GitHub Assets.</p>
                 </div>
                 <div class="search-bar">
-                    <input type="text" id="repo-url" placeholder="Enter Target URL (GitHub/Web)...">
+                    <input type="text" id="repo-url" placeholder="Paste GitHub Repository URL...">
                     <button id="scan-btn">Run Audit</button>
                 </div>
             </section>
@@ -44,19 +44,22 @@
                 <div class="stat-card">
                     <span class="label">Compliance Score</span>
                     <div class="value" id="main-score">--%</div>
+                    <div class="sub-label" id="score-label">Based on SOC2/GDPR</div>
                 </div>
                 <div class="stat-card">
-                    <span class="label">Total Findings</span>
+                    <span class="label" id="findings-title">Total Findings</span>
                     <div class="value red" id="vuln-count">0</div>
+                    <div class="sub-label">Critical Issues Found</div>
                 </div>
                 <div class="stat-card">
-                    <span class="label">Tool Selected</span>
-                    <div class="value" style="font-size: 1.2rem; margin-top: 15px;" id="current-tool-display">Full Audit</div>
+                    <span class="label">Scan Depth</span>
+                    <div class="value">Deep</div>
+                    <div class="sub-label">Real-time Analysis</div>
                 </div>
             </section>
 
             <div id="security-report" class="awsight-report" style="display:none;">
-                <h3><i class="fas fa-file-contract"></i> Audit Summary</h3>
+                <h3 id="report-title"><i class="fas fa-file-contract"></i> Audit Summary</h3>
                 <div id="report-details-list"></div>
             </div>
         </main>
